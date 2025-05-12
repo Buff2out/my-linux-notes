@@ -66,3 +66,46 @@ cd
 umount /mnt
 ```
 
+Умное монтирование btrfs
+
+```
+mount -o compress=zstd,subvol=@ /dev/sda3 /mnt
+mkdir -p /mnt/{boot,home,nix,.snapshots}
+mount -o compress=zstd,subvol=@home /dev/sda3 /mnt/home
+mount -o compress=zstd,subvol=@nix /dev/sda3 /mnt/nix
+mount -o compress=zstd,subvol=@snapshots /dev/sda3 /mnt/.snapshots
+
+
+mount /dev/sda1 /mnt/boot # OR otherway
+mount -t efivarfs efivarfs /sys/firmware/efi/efivars
+```
+
+NixOs
+```
+nixos generate-config --root /mnt
+```
+
+вот такая локаль  
+```
+ru_RU.UTF-8/UTF-8
+```
+отсюда взято
+https://sourceware.org/git/?p=glibc.git;a=blob;f=localedata/SUPPORTED
+
+
+swap-file
+
+```bash
+swapon --show
+df -Th /swapfile
+sudo rm /swapfile
+sudo touch /swapfile
+sudo chattr +C /swapfile
+sudo fallocate -l 16G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+swapon --show
+free -h
+code src/me/guideall/
+```
