@@ -1,6 +1,8 @@
 # Здесь будут заметки ко всему
 
 - [Создание загрузочной флешки (Live CD)](#Создание-загрузочной-флешки-Live-CD)
+- [Установка-QEMU](#Установка-QEMU)
+- [Other](#Other)
 
 #### Создание загрузочной флешки Live CD  
 
@@ -8,6 +10,16 @@ if - откуда, of - куда. Можно таким образом созд�
 ```bash
 sudo dd if=/home/whoami/Downloads/nixos-minimal-24.11.717822.0c0bf9c05738-x86_64-linux.iso of=/dev/sda bs=4M status=progress oflag=sync
 ```
+
+#### Установка QEMU
+
+```
+yay -S qemu-full libguestfs virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat
+
+sudo systemctl start libvirtd.service
+```
+
+#### Other
 
 Утилитки если вдруг всё сломалось 
 ```
@@ -43,6 +55,12 @@ mount /dev/nvme1n1p1 /mnt/boot/efi  # EFI
 
 arch-chroot /mnt
 ```
+
+Если устанавливаем на Vbox, не забываем галку Enable EFI и галку что используем ssd
+
+Отличный гайд на установку
+
+https://devctrl.blog/posts/step-by-step-guide-installing-nix-os-on-virtual-box/
 
 
 При установке форматирование будет примерно такое  
@@ -155,6 +173,10 @@ ru_RU.UTF-8/UTF-8
 отсюда взято
 https://sourceware.org/git/?p=glibc.git;a=blob;f=localedata/SUPPORTED
 
+После установки   
+```
+nixos-enter --root /mnt -c 'passwd alice'
+```
 
 swap-file (на Arch)
 
