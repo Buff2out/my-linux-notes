@@ -308,7 +308,15 @@ yay -Qi firefox
 nix-store -q --tree /run/current-system/sw | grep firefox
 ```
 
+Если что-то отредачили в конфиг файле, нужно перебилдить потом
+
+```bash
+sudo nixos-rebuild switch
 ```
+
+Итого получилось у меня запустить hyprland. Но не запустился kitty. Завтра ещё потыкаю
+
+
 
 #### Other
 
