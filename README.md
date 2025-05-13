@@ -189,6 +189,35 @@ mount -t efivarfs efivarfs /sys/firmware/efi/efivars
 NixOs
 ```bash
 nixos-generate-config --root /mnt
+
+```
+
+Далее очень желательно инициализировать гит репо с конфигом.
+
+```bash
+cd /mnt/etc/nixos
+git init
+git add
+  git config --global user.email "<you@example.com>"
+  git config --global user.name "<Your Name>"
+ssh-keygen
+cat /root/.ssh/id_ed25519.pub # примерно так он и будет выглядеть
+```
+Копируем публичный ключ, вставляем в удалённом репозитории в настройках в блоке ssh.
+
+Создаём репо `nixos` в удалённом GiHub например
+
+```bash
+git commit -m "Init NixOS config files"
+git remote add origin git@github.com:your_name_on_github/nixos-config.git
+
+git branch -M main
+git push -u origin main
+```
+
+
+
+```bash
 nano /mnt/etc/nixos/configuration.nix
 nixos-install
 ```
@@ -249,6 +278,34 @@ https://sourceware.org/git/?p=glibc.git;a=blob;f=localedata/SUPPORTED
 После установки   
 ```
 nixos-enter --root /mnt -c 'passwd alice'
+```
+
+После перезапуска удаляем ключ с хоста:
+
+```
+ssh-keygen -R 192.168.122.64
+```
+
+затем подключаемся спокойно...
+
+После установки так же слетают ключи `ssh-keygen`
+
+так что нужно заново сгенерить, чтобы и дальше в гит закидывать наш изменяющийся конфиг файл.
+
+Вот некоторые полезные команды
+
+Дистрибутив не такой простой как arch. Там где в arch поиск пакета локально был что то вроде 
+
+```
+yay -Qi firefox
+```
+
+то в nix всё сложнее
+
+сначала нужно найти пакет...
+
+```
+nix-store -q --tree /run/current-system/sw | grep firefox
 ```
 
 ```
