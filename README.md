@@ -71,7 +71,8 @@ https://devctrl.blog/posts/step-by-step-guide-installing-nix-os-on-virtual-box/
 
 Для удобства нужно подключиться по ssh
 
-![alt text](image-1.png)
+![alt text](misc/image-5.png)
+
 
 На guest:
 
@@ -163,6 +164,7 @@ ssh root@192.168.122.64 -p 22
 
 пользуемся cfdisk
 
+![alt text](./misc/image-6.png)
 
 При установке форматирование будет примерно такое  
 ```bash
@@ -183,6 +185,7 @@ mkfs.ext4 -L nixos /dev/sda3
 ```
 
 ![alt text](image.png)
+
 
 ![alt text](./misc/image.png)
 
