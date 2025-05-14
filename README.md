@@ -22,6 +22,40 @@ sudo systemctl start libvirtd.service
 sudo systemctl status libvirtd.service
 ```
 
+После перезагрузки пишет что-то вроде этого:
+
+```cpp
+Error starting domain: Requested operation is not valid: network 'default' is not active
+
+Traceback (most recent call last):
+  File "/usr/share/virt-manager/virtManager/asyncjob.py", line 71, in cb_wrapper
+    callback(asyncjob, *args, **kwargs)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/share/virt-manager/virtManager/asyncjob.py", line 107, in tmpcb
+    callback(*args, **kwargs)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/share/virt-manager/virtManager/object/libvirtobject.py", line 57, in newfn
+    ret = fn(self, *args, **kwargs)
+  File "/usr/share/virt-manager/virtManager/object/domain.py", line 1384, in startup
+    self._backend.create()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/site-packages/libvirt.py", line 1390, in create
+    raise libvirtError('virDomainCreate() failed')
+libvirt.libvirtError: Requested operation is not valid: network 'default' is not active
+
+```
+
+Пробую решение:
+
+```bash
+sudo virsh net-define /etc/libvirt/qemu/networks/default.xml
+sudo virsh net-start default
+sudo virsh net-autostart default
+```
+
+И оно сработало
+
+
 #### Возимся с NixOS
 
 Установка и возня
