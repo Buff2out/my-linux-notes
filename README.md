@@ -164,7 +164,6 @@ ssh root@192.168.122.64 -p 22
 
 пользуемся cfdisk
 
-![alt text](./misc/image-6.png)
 
 При установке форматирование будет примерно такое  
 ```bash
@@ -184,13 +183,14 @@ sudo mkfs.btrfs -L NIXOS -f /dev/sda3 # for btrfs
 mkfs.ext4 -L nixos /dev/sda3
 ```
 
+![alt text](./misc/image-6.png)
 ![alt text](image.png)
 
 
 ![alt text](./misc/image.png)
 
 subvolumes for btrfs:  
-```
+```bash
 mount -t btrfs /dev/sda3 /mnt
 cd /mnt
 btrfs subvolume create @
