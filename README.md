@@ -357,6 +357,11 @@ sudo nixos-rebuild switch
 
 #### Other
 
+Корректное завершение работы:  
+```bash
+sudo shutdown -P now
+```
+
 Утилитки если вдруг всё сломалось 
 ```bash
 lsblk
