@@ -375,7 +375,7 @@ iwctl:
 iwctl
 device list
 device <name> set-property Powered on
-adapter adapter set-property Powered on
+adapter phy0 set-property Powered on # phy0 - вместо этого подставить то какой у вас адаптер в list
 station name scan
 station name get-networks
 station name scan
