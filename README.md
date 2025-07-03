@@ -456,3 +456,36 @@ sudo pacman -Syu
 sudo pacman -S linux-firmware
 ```
 
+-Rdd forcibly removes the linux-firmware package without checking dependencies. This is necessary because other packages may depend on it, but you need to clear the conflicting files.
+
+-Syu updates your system, pulling in the new split firmware packages.
+
+-S linux-firmware reinstalls the main firmware package, ensuring all necessary files are properly managed by pacman
+
+    .
+
+This process is confirmed to resolve the conflict and is the approach recommended by both the Arch Linux news and community forums
+
+.
+Why is this happening?
+
+    The linux-firmware package was recently split into several sub-packages (e.g., linux-firmware-nvidia, linux-firmware-amdgpu, etc.).
+
+    Files that were previously owned by the monolithic linux-firmware package are now managed by these new split packages.
+
+    If you have not performed the manual intervention, pacman sees these files as "already existing" and refuses to overwrite them, to prevent accidental data loss
+
+    .
+
+Additional Notes
+
+    Always read the Arch Linux front page news before performing major updates, especially when core packages like firmware or the kernel are involved. These types of changes are usually announced there
+
+.
+
+Never manually delete files in /usr/lib/firmware unless specifically instructed by official documentation or trusted sources
+
+    .
+
+If you follow the steps above, your system should update cleanly and the error will be resolved
+.
