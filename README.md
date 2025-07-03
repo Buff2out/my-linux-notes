@@ -439,3 +439,20 @@ swapon --show
 free -h
 code src/me/guideall/
 ```
+
+
+Проблема с конфликтом файлов   
+```bash
+error: failed to commit transaction (conflicting files)
+linux-firmware-nvidia: /usr/lib/firmware/nvidia/ad103 exists in filesystem
+linux-firmware-nvidia: /usr/lib/firmware/nvidia/ad104 exists in filesystem
+linux-firmware-nvidia: /usr/lib/firmware/nvidia/ad106 exists in filesystem
+linux-firmware-nvidia: /usr/lib/firmware/nvidia/ad107 exists in filesystem
+```  
+Решаем так:  
+```bash
+sudo pacman -Rdd linux-firmware
+sudo pacman -Syu
+sudo pacman -S linux-firmware
+```
+
